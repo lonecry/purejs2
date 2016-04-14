@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>纯JavaScript生成二维码</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="lib/creator.css">
+
+</head>
+<body>
+    <h2>纯JavaScript生成二维码</h2>
+
+    
+    <textarea id="qrUrl" onblur="createQR()">Hello World,I am QR code!</textarea>
+
+    <p>
+        背景色:
+        <input type="text" class="color" value="FFFFFF" id="colorLight">
+    </p>
+    <p>
+        前景色:
+        <input type="text" class="color" value="000000" id="colorDark">
+    </p>
+    <p>
+        纠错级别:
+        <select id="ecclevel">
+            <option value="1">L水平 7% 的字码可被修正</option>
+            <option value="2">M水平 15% 的字码可被修正</option>
+            <option value="3">Q水平 25% 的字码可被修正</option>
+            <option value="4">H水平 30% 的字码可被修正</option>
+        </select>
+    </p>
+    <button onclick="createQR();">点我生成二维码</button>
+    <canvas id="code"></canvas>
+    <!--<p id="p1" style="color: #18a305;font-size: 16px"></p>-->
+</body>
+<script src="../SunWenQR.js"></script>
+<script>
+
+
+    //二维码详细信息
+    var qrUrl = document.getElementById("qrUrl");//具体内容(节点)
+    var colorLight = document.getElementById("colorLight");//背景色代码
+    var colorDark = document.getElementById("colorDark");//前景色代码
+    var ecclevel = document.getElementById("ecclevel");//纠错等级
+    var imageTypeSelector = document.getElementById("imageTypeSelector");//输出类型（节点）
+
+    var qr = new SunWenQR({//实例化一个对象
+    });
+    var t1,t2,t3;
+    var createQR = function()  {//生成二维码方法
+        console.time("总共用时")
+        t1 = new Date();
+        qr.url = utf16to8(qrUrl.value);//具体内容(从节点取值)
+        qr.colorLight = "#" + colorLight.value;//背景色代码
+        qr.colorDark = "#" + colorDark.value;//前景色代码
+        qr.ecclevel = ecclevel.value;//输出类型
+        qr.init();//初始化
+
+    };
+
+
+
+
+</script>
+</html>
