@@ -3,7 +3,32 @@
  2016.04.01
  函数构造器
  */
-
+function UnicodeToUTF8(strInUni){
+    if(null==strInUni)
+        return null;
+    var strUni=String(strInUni);
+    var strUTF8=String();
+    for(var i=0;i<strUni.length;i++){
+        var wchr=strUni.charCodeAt(i);
+        if(wchr<0x80){
+            strUTF8+=strUni.charAt(i);
+        }
+        else if(wchr<0x800){
+            var chr1=wchr&0xff;
+            var chr2=(wchr>>8)&0xff;
+            strUTF8+=String.fromCharCode(0xC0|(chr2<<2)|((chr1>>6)&0x3));
+            strUTF8+=String.fromCharCode(0x80|(chr1&0x3F));
+        }
+        else{
+            var chr1=wchr&0xff;
+            var chr2=(wchr>>8)&0xff;
+            strUTF8+=String.fromCharCode(0xE0|(chr2>>4));
+            strUTF8+=String.fromCharCode(0x80|((chr2<<2)&0x3C)|((chr1>>6)&0x3));
+            strUTF8+=String.fromCharCode(0x80|(chr1&0x3F));
+        }
+    }
+    return strUTF8;
+}
 
 function utf16to8(str) {// 中文编码问题
     var out, i, len, c;
@@ -34,7 +59,7 @@ function SunWenQR ( customize ) {
     this.url = customize.url || "";
 
     //画布默认的宽度高度。
-    this.size  = (customize.size  || 400);
+    this.size  = (customize.size  || 200);
 
     //QR 穿插其他图片内容？默认是不添加的、
     this.qrc = false;
@@ -347,6 +372,7 @@ function SunWenQR ( customize ) {
     // 根据纠错等级，找出适合数据大小的二维码版本(8bit 版本)
 
         t = instring.length;      //数据码字长度 (区别数据位数=数据码字 X 8)
+        alert(t);
         version = 0;              //版本号，1-40
         do {
             version++;
