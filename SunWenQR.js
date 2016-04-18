@@ -372,7 +372,7 @@ function SunWenQR ( customize ) {
     // 根据纠错等级，找出适合数据大小的二维码版本(8bit 版本)
 
         t = instring.length;      //数据码字长度 (区别数据位数=数据码字 X 8)
-        alert(t);
+        console.log(t);
         version = 0;              //版本号，1-40
         do {
             version++;

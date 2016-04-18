@@ -34,7 +34,7 @@
     <canvas id="code"></canvas>
 
 </body>
-<script src="../SunWenQR.js"></script>
+<script src="../SunWenQR.js" charset="UTF-8"></script>
 <script charset="UTF-8">
 
 
@@ -51,7 +51,7 @@
     var createQR = function()  {//生成二维码方法
         console.time("总共用时");
         t1 = new Date();
-        qr.url = utf16to8(qrUrl.value);//具体内容(从节点取值)
+        qr.url = UnicodeToUTF8(qrUrl.value);//具体内容(从节点取值)
         qr.colorLight = "#FFF";//背景色代码
         qr.colorDark = "#000" ;//前景色代码
         qr.ecclevel = ecclevel.value;//输出类型
