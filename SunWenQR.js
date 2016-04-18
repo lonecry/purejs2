@@ -59,7 +59,7 @@ function SunWenQR ( customize ) {
     this.url = customize.url || "";
 
     //画布默认的宽度高度。
-    this.size  = (customize.size  || 200);
+    this.size  = (customize.size  || 400);
 
     //QR 穿插其他图片内容？默认是不添加的、
     this.qrc = false;
@@ -739,7 +739,7 @@ SunWenQR.prototype = {
             }
         }
         //设置画布内容
-        var size = this.size;
+       /* var size = this.size;
         var qrc = this.qrc;
         qrc.canvas.width = qrc.canvas.height = size+10;
         var px = size/width;
@@ -751,14 +751,15 @@ SunWenQR.prototype = {
 
 
 
-        /*qrc.clearRect(0,0,size,size);
+
+        /!*qrc.clearRect(0,0,size,size);
         qrc.fillStyle ="pink";
-        qrc.fillRect(0, 0, px*width, px*width);*/
+        qrc.fillRect(0, 0, px*width, px*width);*!/
 
 
 
 
-        //一行一行地填满canvas
+        /!*!//一行一行地填满canvas
         for( var i = 0; i < width; i++ ) {
             for( var j = 0; j < width; j++ ) {
 
@@ -768,7 +769,36 @@ SunWenQR.prototype = {
                 }
              }
 
-         }
+         }*!/*/
+        var size = this.size;
+        var qrc = this.qrc;
+
+        qrc.canvas.width = qrc.canvas.height = size;
+        qrc.fillStyle = '#eee';
+        qrc.fillRect(0, 0, size, size);
+
+        qrc.lineWidth=1;
+
+        var px = size;
+        px /= width + 10;
+        px=Math.round(px - 0.5);
+
+        //Fill canvas with set colors
+        qrc.clearRect(0,0,size,size);
+        qrc.fillStyle = this.colorLight;
+        qrc.fillRect(0, 0, px*(width+8), px*(width+8));
+        qrc.fillStyle = this.colorDark;
+
+        //Write boxes per row
+        for( var i = 0; i < width; i++ ) {
+
+            for( var j = 0; j < width; j++ ) {
+                if( qf[j*width+i] ) {
+                    qrc.fillRect(px*(4+i),px*(4+j),px,px);
+                }
+            }
+
+        }
 
         console.timeEnd("渲染用时");
         console.timeEnd("总共用时");

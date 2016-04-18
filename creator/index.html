@@ -4,23 +4,19 @@
     <title>纯JavaScript生成二维码</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
+    <META HTTP-EQUIV="pragma" CONTENT="no-cache">
+    <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+    <META HTTP-EQUIV="expires" CONTENT="Wed, 26 Feb 1997 08:21:57 GMT">
+    <META HTTP-EQUIV="expires" CONTENT="0">
+
     <link rel="stylesheet" href="lib/creator.css">
 
 </head>
 <body>
     <h2>纯JavaScript生成二维码</h2>
 
-    
-    <textarea id="qrUrl" >Hello World,I am QR code!</textarea>
+    <textarea id="qrUrl" >http://www.baidu.com</textarea>
 
-    <!--<p>
-        背景色:
-        <input type="text" class="color" value="FFFFFF" id="colorLight">
-    </p>
-    <p>
-        前景色:
-        <input type="text" class="color" value="000000" id="colorDark">
-    </p>-->
     <p>
         纠错级别:
         <select id="ecclevel">
@@ -51,7 +47,7 @@
     var createQR = function()  {//生成二维码方法
         console.time("总共用时");
         t1 = new Date();
-        qr.url = UnicodeToUTF8(qrUrl.value);//具体内容(从节点取值)
+        qr.url = utf16to8(qrUrl.value);//具体内容(从节点取值)
         qr.colorLight = "#FFF";//背景色代码
         qr.colorDark = "#000" ;//前景色代码
         qr.ecclevel = ecclevel.value;//输出类型
