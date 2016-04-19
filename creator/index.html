@@ -4,10 +4,6 @@
     <title>纯JavaScript生成二维码</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
-    <META HTTP-EQUIV="pragma" CONTENT="no-cache">
-    <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
-    <META HTTP-EQUIV="expires" CONTENT="Wed, 26 Feb 1997 08:21:57 GMT">
-    <META HTTP-EQUIV="expires" CONTENT="0">
 
     <link rel="stylesheet" href="lib/creator.css">
 
@@ -15,7 +11,7 @@
 <body>
     <h2>纯JavaScript生成二维码</h2>
 
-    <textarea id="qrUrl" >http://www.baidu.com</textarea>
+    <textarea id="qrUrl" ></textarea>
 
     <p>
         纠错级别:
@@ -26,7 +22,7 @@
             <option value="4">H水平 30% 的字码可被修正</option>
         </select>
     </p>
-    <button onclick="createQR();">点我生成二维码</button>
+    <button onclick="createQR();">生成二维码</button>
     <canvas id="code"></canvas>
 
 </body>
